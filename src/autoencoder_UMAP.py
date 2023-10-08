@@ -1,8 +1,10 @@
 import pandas as pd
-import umap
 from tensorflow.keras import Model
 from tensorflow.keras import Sequential
 from tensorflow.keras.layers import Dense
+
+from importlib.machinery import SourceFileLoader
+mp = SourceFileLoader("umap_", "venvIA/lib/python3.9/site-packages/umap/umap_.py").load_module()
 
 class AutoEncoders(Model):
 
@@ -48,7 +50,7 @@ def get_MLP_encoding(data):
   return reduced_df
 
 def umap2d3d(data, dims):
-  reducer = umap.UMAP(n_components=dims)
+  reducer = mp.UMAP(n_components=dims)
   embedding = reducer.fit_transform(data)
 
   return embedding

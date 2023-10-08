@@ -1,3 +1,4 @@
+bertopic
 numpy
 pandas
 matplotlib
