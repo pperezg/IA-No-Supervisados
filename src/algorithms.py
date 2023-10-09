@@ -8,7 +8,7 @@ the project.
 # Imports for this file
 import numpy as np
 import numpy.ma as ma
-
+from distances import *
 
 '''
 Function: pseudo_knn
@@ -127,3 +127,70 @@ def boxes(norm, distance):
             results[idx,i] = 1
 
     return results
+
+def mountain(data, sigma, beta, K, norm, gridPoints=10):
+    dims = data.shape[1]
+    auxGrid = np.tile(np.linspace(0,1,gridPoints),dims).reshape(-1,gridPoints)
+    grid = np.array(np.meshgrid(*auxGrid)).T.reshape(-1,dims)
+    npoints = len(grid)
+
+    #Initial center
+    densities = np.zeros((npoints,1))
+    for i in range(npoints):
+        dist = applyNorm(norm, data, data2=grid[i,:])**2
+        densities[i,0] = np.sum(np.exp(-dist/(2*sigma**2)))
+    max_idx = np.argmax(densities)
+    init_center = grid[max_idx,:]
+    max_density = max(densities)[0]
+    num_centers = 1
+
+    #Find other centers
+    centersArray = np.array([init_center])
+    currentCenter = init_center
+
+    while num_centers < K:
+        aux_densities = np.zeros((npoints,1))
+        dist2center = applyNorm(norm, grid, data2=centers[-1,:])**2
+        aux_densities = densities[:,(num_centers-1)].reshape(-1,1) - max_density*np.exp(-dist2center/(2*beta**2)).reshape(-1,1)
+        densities = np.append(densities,aux_densities,axis=1)
+        max_density = max(densities[:,num_centers])
+        max_idx = np.argmax(densities[:,num_centers])
+        currentCenter = grid[max_idx,:]
+        centersArray = np.append(centersArray, currentCenter.reshape(1,-1), axis = 0)
+        num_centers += 1
+
+    return centersArray
+
+def subtractive(data, ra, factor_ra, K, norm):
+    rb = ra*factor_ra
+    dist = applyNorm(norm, data)**2
+    n_data, dims = data.shape
+    
+    #Initial center
+    densities = np.zeros((n_data,1))
+    for i in range(n_data):
+        densities[i,0] = np.sum(np.exp(-dist[i,:]/(ra**2)))
+    max_idx = np.argmax(densities)
+    init_center = data[max_idx,:]
+    max_density = max(densities)[0]
+    num_centers = 1
+
+    #Find other centers
+    centersArray = np.array([init_center])
+    currentCenter = init_center
+    repeats = 0
+    while num_centers < K:
+        aux_densities = densities[:,(num_centers-1)].reshape(-1,1) - max_density*np.exp(-dist[:,max_idx]/((0.5*rb)**2)).reshape(-1,1)
+        densities = np.append(densities,aux_densities,axis=1)
+        max_density = max(densities[:,num_centers])
+        max_idx = np.argmax(densities[:,num_centers])
+        currentCenter = data[max_idx,:]
+        if currentCenter not in centersArray:
+            centersArray = np.append(centersArray, currentCenter.reshape(1,-1), axis = 0)
+        else:
+            repeats += 1
+            if repeats == 3:
+                break
+        num_centers += 1
+
+    return centersArray

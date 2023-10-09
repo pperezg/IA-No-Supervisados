@@ -37,4 +37,3 @@ if __name__ == "__main__":
     saveResultFile(cajas_df, knn_df, norms, N, n, m)
 
     print('Done')
-    print(umap2d)

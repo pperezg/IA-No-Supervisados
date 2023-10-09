@@ -25,11 +25,15 @@ Parameters: norm (string), data (numpy array), p (int), graph (boolean)
 
 Returns: result (numpy array)
 '''
-def applyNorm(norm, data, p=6, graph=False):
+def applyNorm(norm, data, data2=None, p=6, graph=False):
 
     #Reshapes the data in order to use vectorize
-    a = data[:,None,:]
-    b = data[None,:,:]
+    if data2==None:
+        a = data[:,None,:]
+        b = data[None,:,:]
+    else:
+        a = data[:,None,:]
+        b = data2[None,:,:]
 
     #Vectorizes the norm function according to the parameter 'norm'
     if norm == 'euclid':
