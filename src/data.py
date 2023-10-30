@@ -122,7 +122,7 @@ norms (list of strings), N (int), n (int), m (int)
 * n: number of characteristics
 * m: number of classes
 '''
-def saveResultFile(cajas_df, knn_df, norms, N, n, m):
+def saveResultFile(cajas_df, knn_df, norms, N, n, m, type, silhouette, rand):
     
     #Gets the current date and time, sets results path accordingly
     now = datetime.now()
@@ -139,6 +139,9 @@ def saveResultFile(cajas_df, knn_df, norms, N, n, m):
         for i in range(len(norms)):
 
             f.write('Norm: '+norms[i]+'\n\n')
+
+            f.write('Rand:' + str(silhouette[i]) + '\n')
+            f.write('Silhouette:' + str(rand[i]) + '\n')
 
             f.write('Boxes:\n')
             aux = pd.DataFrame(cajas_df[i])

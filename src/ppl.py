@@ -13,6 +13,7 @@ if __name__ == "__main__":
     from distances import *
     from data import *
     from autoencoder_UMAP import *
+    from aux import *
 
     features, target = getData() #Get and organizes the data
     higher_dim = get_MLP_encoding(features) #Gets MLP encoding to higher dims
@@ -24,6 +25,8 @@ if __name__ == "__main__":
     #Lists to store the results of the algorithms
     cajas_df = []
     knn_df = []
+    silhouetteNaive = []
+    randNaive = []
 
     for norma in norms:
         print('currently running norm: '+norma)
@@ -32,8 +35,10 @@ if __name__ == "__main__":
         groups_knn = pseudo_knn(norm, 25) #Applies the knn-like algorithm
         cajas_df.append(groups_cajas) #Stores the results
         knn_df.append(groups_knn)
+        labelsCajas = olga2Labels(groups_cajas)
+        labelsKnn = olga2Labels(groups_knn)
     
     #Saves the results to .txt files
-    saveResultFile(cajas_df, knn_df, norms, N, n, m)
+    saveResultFile(cajas_df, knn_df, norms, N, n, m, 'Naive', silhouetteNaive, randNaive)
 
     print('Done')
