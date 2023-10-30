@@ -28,8 +28,8 @@ if __name__ == "__main__":
     for norma in norms:
         print('currently running norm: '+norma)
         norm = applyNorm(norma, features) #Applies the norm to the data
-        groups_cajas = boxes(norm, 0.2) #Applies the boxes algorithm
-        groups_knn = pseudo_knn(norm, 15) #Applies the knn-like algorithm
+        groups_cajas = boxes(norm, 0.3) #Applies the boxes algorithm
+        groups_knn = pseudo_knn(norm, 25) #Applies the knn-like algorithm
         cajas_df.append(groups_cajas) #Stores the results
         knn_df.append(groups_knn)
     

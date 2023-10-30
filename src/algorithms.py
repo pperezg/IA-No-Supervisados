@@ -8,6 +8,8 @@ the project.
 # Imports for this file
 import numpy as np
 import numpy.ma as ma
+from sklearn.metrics import silhouette_score
+from sklearn.metrics.cluster import rand_score
 from distances import *
 
 '''
@@ -502,3 +504,10 @@ def pcm(x, c, m, e, max_iterations, metric="euclidean", v0=None):
     v, v0, u, u0, d, t = fcm(x, c, m, e, max_iterations, metric=metric, v0=v0)
     n = _eta(u, d, m)
     return _cmeans(x, c, m, e, t, _pcm_criterion, metric, v0=v, n=n)
+
+
+def rand(labels, cluster_results):
+    return rand_score(labels, cluster_results)
+
+def silhouette(unlabeled_data, cluster_results):
+    return silhouette_score(unlabeled_data, cluster_results)
