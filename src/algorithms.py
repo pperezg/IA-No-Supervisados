@@ -43,12 +43,14 @@ def pseudo_knn(norm, k):
     masked_norm = np.ma.masked_equal(norm, 0)
     centerPoint = 0 #Sets the first reference poing
     k_loop = k #Sets the number of neighbors to be considered
-    
+
     for i in range(neighborhoods):
 
         results[centerPoint, i] = 1 #Adds center point to neighborhood i
         if i==neighborhoods-1: #If it is the last neighborhood, sets k_loop
             k_loop = size%k
+            if k_loop==0:
+                k_loop=k
 
         for j in range(k_loop-1):
             minDist = np.argmin(masked_norm[centerPoint,:]) #Finds closest point
@@ -109,8 +111,8 @@ def boxes(norm, distance):
         masked_norm[centerPoint,:] = ma.masked
 
         nextCenterFound = False
-
         m = 0
+
         #Searches for a non-assigned point to be the next reference point
         while not nextCenterFound and m < size:
             if not masked_norm[m,:].mask.all():

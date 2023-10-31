@@ -122,12 +122,12 @@ norms (list of strings), N (int), n (int), m (int)
 * n: number of characteristics
 * m: number of classes
 '''
-def saveResultFile(cajas_df, knn_df, norms, N, n, m, type, silhouette, rand):
+def saveResultFile(cajas_df, knn_df, norms, N, n, m, name, silhouette, rand):
     
     #Gets the current date and time, sets results path accordingly
     now = datetime.now()
     dt_string = now.strftime("%d-%m-%Y %H:%M:%S")
-    resultPath = 'src/results/results_' + dt_string + '.txt'
+    resultPath = 'src/results/results_' + name + '_'+ dt_string + '.txt'
 
     #Opens the file and writes the results
     with open(resultPath, 'w') as f:
@@ -140,15 +140,16 @@ def saveResultFile(cajas_df, knn_df, norms, N, n, m, type, silhouette, rand):
 
             f.write('Norm: '+norms[i]+'\n\n')
 
-            f.write('Rand:' + str(silhouette[i]) + '\n')
-            f.write('Silhouette:' + str(rand[i]) + '\n')
-
             f.write('Boxes:\n')
+            f.write('Silhouette score: '+str(silhouette[0][i])+'\n')
+            f.write('Rand score: '+str(rand[0][i])+'\n')
             aux = pd.DataFrame(cajas_df[i])
             f.write(aux.to_string())
             f.write('\n')
 
             f.write('\nKNN:\n')
+            f.write('Silhouette score: '+str(silhouette[1][i])+'\n')
+            f.write('Rand score: '+str(rand[1][i])+'\n')
             aux = pd.DataFrame(knn_df[i])
             f.write(aux.to_string())
             f.write('\n\n\n\n\n')

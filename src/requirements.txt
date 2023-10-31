@@ -6,3 +6,4 @@ scikit-learn
 datetime
 tensorflow
 umap-learn
+seaborn

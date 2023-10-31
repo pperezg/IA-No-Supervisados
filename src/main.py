@@ -11,9 +11,12 @@ if __name__ == "__main__":
     #Basic imports for creating the virtual environment
     from subprocess import run, Popen
 
-    #Creation of the virtual environment
-    run(["python", "-m", "venv", "venvIA"])
-    #Popen(["source ", "venvIA/bin/activate"],shell=True)
-    run(["venvIA/bin/python", "-m", "pip", "install", "--upgrade", "pip"])
-    run(["venvIA/bin/pip", "install", "-r", "./src/requirements.txt"])
+    createvenv = input('Do you want to create a virtual environment? (y/n) ')
+
+    if createvenv=='y':
+        #Creation of the virtual environment
+        run(["python", "-m", "venv", "venvIA"])
+        #Popen(["source ", "venvIA/bin/activate"],shell=True)
+        run(["venvIA/bin/python", "-m", "pip", "install", "--upgrade", "pip"])
+        run(["venvIA/bin/pip", "install", "-r", "./src/requirements.txt"])
     run(["venvIA/bin/python", "src/ppl.py"])
