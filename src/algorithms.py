@@ -154,7 +154,7 @@ def mountain(data, sigma, beta, K, norm, gridPoints=10):
 
     while num_centers < K:
         aux_densities = np.zeros((npoints,1))
-        dist2center = applyNorm(norm, grid, data2=centers[-1,:])**2
+        dist2center = applyNorm(norm, grid, data2=centersArray[-1,:])**2
         aux_densities = densities[:,(num_centers-1)].reshape(-1,1) - max_density*np.exp(-dist2center/(2*beta**2)).reshape(-1,1)
         densities = np.append(densities,aux_densities,axis=1)
         max_density = max(densities[:,num_centers])
@@ -509,7 +509,13 @@ def pcm(x, c, m, e, max_iterations, metric="euclidean", v0=None):
 
 
 def rand(labels, cluster_results):
-    return rand_score(labels, cluster_results)
+    try:
+        return rand_score(labels, cluster_results)
+    except:
+        return 0
 
 def silhouette(unlabeled_data, cluster_results):
-    return silhouette_score(unlabeled_data, cluster_results)
+    try:
+        return silhouette_score(unlabeled_data, cluster_results)
+    except:
+        return -1

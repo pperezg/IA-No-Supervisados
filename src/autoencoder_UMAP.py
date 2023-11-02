@@ -13,16 +13,16 @@ class AutoEncoders(Model):
     super().__init__()
     self.encoder = Sequential(
         [
-          Dense(8, activation="relu"),
-          Dense(10, activation="relu"),
-          Dense(12, activation="relu")
+          Dense(4, activation="relu"),
+          Dense(4, activation="relu"),
+          Dense(5, activation="relu")
         ]
     )
 
     self.decoder = Sequential(
         [
-          Dense(10, activation="relu"),
-          Dense(8, activation="relu"),
+          Dense(4, activation="relu"),
+          Dense(4, activation="relu"),
           Dense(output_units, activation="sigmoid")
         ]
     )

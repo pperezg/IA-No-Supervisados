@@ -28,12 +28,12 @@ Returns: result (numpy array)
 def applyNorm(norm, data, data2=None, p=6, graph=False):
 
     #Reshapes the data in order to use vectorize
-    if data2==None:
+    if data2 is None:
         a = data[:,None,:]
         b = data[None,:,:]
     else:
         a = data[:,None,:]
-        b = data2[None,:,:]
+        b = data2[None,None,:]
 
     #Vectorizes the norm function according to the parameter 'norm'
     if norm == 'euclid':

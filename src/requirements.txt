@@ -7,3 +7,4 @@ datetime
 tensorflow
 umap-learn
 seaborn
+itertools

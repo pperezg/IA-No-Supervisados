@@ -5,8 +5,8 @@ Number of classes: 3
 Norm: euclid
 
 Boxes:
-Silhouette score: 0.6154784257537625
-Rand score: 0.7378970917225951
+Silhouette score: 0.83763963
+Rand score: 0.7762863534675615
        0    1
 0    1.0  0.0
 1    1.0  0.0
@@ -160,8 +160,8 @@ Rand score: 0.7378970917225951
 149  0.0  1.0
 
 KNN:
-Silhouette score: 0.40794451162592404
-Rand score: 0.8278299776286353
+Silhouette score: 0.5687837
+Rand score: 0.8568232662192393
        0    1    2
 0    1.0  0.0  0.0
 1    1.0  0.0  0.0
@@ -320,8 +320,8 @@ Rand score: 0.8278299776286353
 Norm: manhattan
 
 Boxes:
-Silhouette score: 0.5892852346039739
-Rand score: 0.731185682326622
+Silhouette score: 0.83763963
+Rand score: 0.7762863534675615
        0    1
 0    1.0  0.0
 1    1.0  0.0
@@ -475,8 +475,8 @@ Rand score: 0.731185682326622
 149  0.0  1.0
 
 KNN:
-Silhouette score: 0.38303027453378946
-Rand score: 0.8052796420581656
+Silhouette score: 0.6767758
+Rand score: 0.905503355704698
        0    1    2
 0    1.0  0.0  0.0
 1    1.0  0.0  0.0
@@ -635,8 +635,8 @@ Rand score: 0.8052796420581656
 Norm: mahalanobis
 
 Boxes:
-Silhouette score: 0.6154784257537625
-Rand score: 0.7378970917225951
+Silhouette score: 0.83763963
+Rand score: 0.7762863534675615
        0    1
 0    1.0  0.0
 1    1.0  0.0
@@ -790,8 +790,8 @@ Rand score: 0.7378970917225951
 149  0.0  1.0
 
 KNN:
-Silhouette score: 0.40794451162592404
-Rand score: 0.8278299776286353
+Silhouette score: 0.5687837
+Rand score: 0.8568232662192393
        0    1    2
 0    1.0  0.0  0.0
 1    1.0  0.0  0.0
@@ -950,8 +950,8 @@ Rand score: 0.8278299776286353
 Norm: lp
 
 Boxes:
-Silhouette score: 0.6103024164363621
-Rand score: 0.7354809843400447
+Silhouette score: 0.83763963
+Rand score: 0.7762863534675615
        0    1
 0    1.0  0.0
 1    1.0  0.0
@@ -1105,8 +1105,8 @@ Rand score: 0.7354809843400447
 149  0.0  1.0
 
 KNN:
-Silhouette score: 0.41147011648296083
-Rand score: 0.8278299776286353
+Silhouette score: 0.5051374
+Rand score: 0.8195973154362416
        0    1    2
 0    1.0  0.0  0.0
 1    1.0  0.0  0.0
