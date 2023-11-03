@@ -67,7 +67,7 @@ if __name__ == "__main__":
     '''
     print('Evaluating cluster centers: Mountain')
 
-    sigma = [0.25,0.5,0.75]
+    sigma = [0.1,0.2,0.3]
     numClusters = [2,3,4]
     gridPoints = [5,8]
     silhouettes = []
@@ -79,7 +79,6 @@ if __name__ == "__main__":
     print('Normal Dimensions')
 
 
-    '''
     for i in range(len(combinationsMtn)):
         print('Currently running combination '+str(i+1)+' of '+str(len(combinationsMtn)))
         centers = mountain(features, combinationsMtn[i][0], combinationsMtn[i][0]*1.5, combinationsMtn[i][1], combinationsMtn[i][3], gridPoints=combinationsMtn[i][2])
@@ -251,5 +250,7 @@ if __name__ == "__main__":
     centersArray = []  
 
     print('Evaluating clustering algorithms')
+
+    '''
 
     print('Done')
