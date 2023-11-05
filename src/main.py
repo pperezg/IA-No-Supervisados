@@ -11,7 +11,7 @@ if __name__ == "__main__":
     #Basic imports for creating the virtual environment
     from subprocess import run
 
-    createvenv = input('Do you want to create a virtual environment? (y/n)')
+    createvenv = input('Do you want to create a virtual environment? (y/n) ')
 
     if createvenv=='y':
         #Creation of the virtual environment

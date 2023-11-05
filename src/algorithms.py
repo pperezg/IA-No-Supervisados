@@ -11,6 +11,7 @@ import numpy.ma as ma
 from sklearn.metrics import silhouette_score
 from sklearn.metrics.cluster import rand_score
 from distances import *
+from aux import *
 
 '''
 Function: pseudo_knn
@@ -200,145 +201,42 @@ def subtractive(data, ra, factor_ra, K, norm):
     return centersArray
 
 
-
-
-
-
-'''
-KMEANS DE https://github.com/stuntgoat/kmeans/blob/master/kmeans.py
-'''
-
-from collections import defaultdict
-from random import uniform
-from math import sqrt
-
-def point_avg(points):
-    """
-    Accepts a list of points, each with the same number of dimensions.
-    NB. points can have more dimensions than 2
-    
-    Returns a new point which is the center of all the points.
-    """
-    dimensions = len(points[0])
-
-    new_center = []
-
-    for dimension in xrange(dimensions):
-        dim_sum = 0  # dimension sum
-        for p in points:
-            dim_sum += p[dimension]
-
-        # average of each dimension
-        new_center.append(dim_sum / float(len(points)))
-
-    return new_center
-
-
-def update_centers(data_set, assignments):
-    """
-    Accepts a dataset and a list of assignments; the indexes 
-    of both lists correspond to each other.
-
-    Compute the center for each of the assigned groups.
-
-    Return `k` centers where `k` is the number of unique assignments.
-    """
-    new_means = defaultdict(list)
-    centers = []
-    for assignment, point in zip(assignments, data_set):
-        new_means[assignment].append(point)
+def kmeans(data, K, norm, max_iter=1000):
+    centers = initialCenters(data, K)
+    pastCenters = None
+    iter = 1
+    while iter < max_iter and np.not_equal(centers, pastCenters).any():
+        distances = []
+        for i in range(K):
+            distances.append(applyNorm(norm, data, data2=centers[i,:]))
+        labels = createClusters(data, centers, norm)
+        pastCenters = centers
+        centers = updateCenters(data, labels, K)
+        iter += 1
+    return labels
         
-    for points in new_means.itervalues():
-        centers.append(point_avg(points))
 
+def initialCenters(data, K):
+    n_data, dims = data.shape
+    centers = np.zeros((K,dims))
+    randomCenters = np.random.randint(0,n_data,K)
+    for i in range(K):
+        centers[i,:] = data[randomCenters[i],:]
     return centers
 
-
-def assign_points(data_points, centers):
-    """
-    Given a data set and a list of points betweeen other points,
-    assign each point to an index that corresponds to the index
-    of the center point on it's proximity to that point. 
-    Return a an array of indexes of centers that correspond to
-    an index in the data set; that is, if there are N points
-    in `data_set` the list we return will have N elements. Also
-    If there are Y points in `centers` there will be Y unique
-    possible values within the returned list.
-    """
-    assignments = []
-    for point in data_points:
-        shortest = ()  # positive infinity
-        shortest_index = 0
-        for i in xrange(len(centers)):
-            val = distance(point, centers[i])
-            if val < shortest:
-                shortest = val
-                shortest_index = i
-        assignments.append(shortest_index)
-    return assignments
-
-
-def distance(a, b):
-    """
-    """
-    dimensions = len(a)
-    
-    _sum = 0
-    for dimension in xrange(dimensions):
-        difference_sq = (a[dimension] - b[dimension]) ** 2
-        _sum += difference_sq
-    return sqrt(_sum)
-
-
-def generate_k(data_set, k):
-    """
-    Given `data_set`, which is an array of arrays,
-    find the minimum and maximum for each coordinate, a range.
-    Generate `k` random points between the ranges.
-    Return an array of the random points within the ranges.
-    """
-    centers = []
-    dimensions = len(data_set[0])
-    min_max = defaultdict(int)
-
-    for point in data_set:
-        for i in xrange(dimensions):
-            val = point[i]
-            min_key = 'min_%d' % i
-            max_key = 'max_%d' % i
-            if min_key not in min_max or val < min_max[min_key]:
-                min_max[min_key] = val
-            if max_key not in min_max or val > min_max[max_key]:
-                min_max[max_key] = val
-
-    for _k in xrange(k):
-        rand_point = []
-        for i in xrange(dimensions):
-            min_val = min_max['min_%d' % i]
-            max_val = min_max['max_%d' % i]
-            
-            rand_point.append(uniform(min_val, max_val))
-
-        centers.append(rand_point)
-
+def updateCenters(data, labels, K):
+    _, dims = data.shape
+    centers = np.zeros((K,dims))
+    for i in range(K):
+        labelsMatch = np.equal(labels,i)
+        dataInCenter = data[labelsMatch,:]
+        centers[i,:] = np.mean(dataInCenter, axis=0)
     return centers
-
-
-def k_means(dataset, k):
-    k_points = generate_k(dataset, k)
-    assignments = assign_points(dataset, k_points)
-    old_assignments = None
-    while assignments != old_assignments:
-        new_centers = update_centers(dataset, assignments)
-        old_assignments = assignments
-        assignments = assign_points(dataset, new_centers)
-    return zip(assignments, dataset)
 
 '''
 Fuzzy and Probabilistic C-Means de https://github.com/holtskinner/PossibilisticCMeans/blob/master/cmeans.py
 '''
 
-import numpy as np
 from scipy.spatial.distance import cdist
 
 

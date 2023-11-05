@@ -24,12 +24,13 @@ if __name__ == "__main__":
 
     value_sets = [features, higher_dim, umap2d] #List of data sets
 
+    '''
+
+    print('Evaluating Naive Data Sets')
+
     #Lists to store the results of the algorithms
     cajas_df = []
     knn_df = []
-
-    
-    print('Evaluating Naive Data Sets')
 
     for data_set in value_sets:
         print('New data set')
@@ -125,7 +126,7 @@ if __name__ == "__main__":
             bestUMAP = centersArray[maxSilhouette]
         else:
             bestUMAP = centersArray[maxRand]
-    saveResultFileMtn(combinationsMtn, 'UMAP', silhouettes, randScores, bestUMAP)
+    saveResultFileMtn(combinationsMtn, 'UMAP', silhouettes, randScores, bestUMAP)    
     silhouettes = []
     randScores = []
     centersArray = []
@@ -248,6 +249,46 @@ if __name__ == "__main__":
     randScores = []
     centersArray = []  
 
-    print('Evaluating clustering algorithms')
+    '''
+
+    print('Evaluating clustering algorithms: KMeans')
+
+    K = [2,3,4]
+    combinationsKMeans = list(itertools.product(K, norms))
+    silhouettes = []
+    randScores = []
+    
+    print('Normal Dimensions')
+
+    for i in range(len(combinationsKMeans)):
+        print('Currently running combination '+str(i+1)+' of '+str(len(combinationsKMeans)))
+        labels = kmeans(features, combinationsKMeans[i][0], combinationsKMeans[i][1])
+        silhouetteKNN = silhouette(features, labels); silhouettes.append(silhouetteKNN)
+        randKNN = rand(target, labels); randScores.append(randKNN)
+    saveResultFileKmeans(combinationsKMeans, 'NormalDims', silhouettes, randScores)
+
+    print('UMAP')
+    silhouettes = []
+    randScores = []
+
+    for i in range(len(combinationsKMeans)):
+        print('Currently running combination '+str(i+1)+' of '+str(len(combinationsKMeans)))
+        labels = kmeans(umap2d, combinationsKMeans[i][0], combinationsKMeans[i][1])
+        silhouetteKNN = silhouette(umap2d, labels); silhouettes.append(silhouetteKNN)
+        randKNN = rand(target, labels); randScores.append(randKNN)
+        imgName = 'KMeans'+str(combinationsKMeans[i][0])
+        plot2dClusters(umap2d, labels, imgName, combinationsKMeans[i][1])
+    saveResultFileKmeans(combinationsKMeans, 'UMAP', silhouettes, randScores)
+
+    print('Higher Dimensions')
+    silhouettes = []
+    randScores = []
+
+    for i in range(len(combinationsKMeans)):
+        print('Currently running combination '+str(i+1)+' of '+str(len(combinationsKMeans)))
+        labels = kmeans(higher_dim, combinationsKMeans[i][0], combinationsKMeans[i][1])
+        silhouetteKNN = silhouette(higher_dim, labels); silhouettes.append(silhouetteKNN)
+        randKNN = rand(target, labels); randScores.append(randKNN)
+    saveResultFileKmeans(combinationsKMeans, 'HigherDims', silhouettes, randScores)
 
     print('Done')

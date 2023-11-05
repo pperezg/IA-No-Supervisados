@@ -202,3 +202,28 @@ def saveResultFileSub(combinatoria, name, silhouette, rand, best):
         f.write('\n By: Paulina Pérez Garcés')
 
     print('Results saved in '+resultPath) #Prints the path to the results file
+
+
+def saveResultFileKmeans(combinatoria, name, silhouette, rand):
+    #Gets the current date and time, sets results path accordingly
+    now = datetime.now()
+    dt_string = now.strftime("%d-%m-%Y %H:%M:%S")
+    resultPath = 'src/results/results_KMeans_' + name + '_'+ dt_string + '.txt'
+
+    bestRand = np.max(rand)
+    bestSil = np.max(silhouette)
+
+    #Opens the file and writes the results
+    with open(resultPath, 'w') as f:
+
+        f.write('Best Rand: '+str(bestRand)+'\n')
+        f.write('Best Silhouette: '+str(bestSil)+'\n\n')
+        f.write('K, Norm --> Silhouette, Rand' +'\n')
+        for i in range(len(combinatoria)):
+            f.write('Values: '+str(combinatoria[i])+' --> ')
+            f.write('Silhouette: '+str(silhouette[i])+' ')
+            f.write('Rand: '+str(rand[i])+'\n')
+
+        f.write('\n By: Paulina Pérez Garcés')
+
+    print('Results saved in '+resultPath) #Prints the path to the results file
