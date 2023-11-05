@@ -22,14 +22,13 @@ if __name__ == "__main__":
     N, n, m = dataCharacterization(features, target) #Gets data characteristics
     norms = ['euclid', 'manhattan', 'mahalanobis', 'lp'] #Norms used
 
-    #value_sets = [features, higher_dim, umap2d] #List of data sets
-    value_sets = [higher_dim]
+    value_sets = [features, higher_dim, umap2d] #List of data sets
 
     #Lists to store the results of the algorithms
     cajas_df = []
     knn_df = []
 
-    '''
+    
     print('Evaluating Naive Data Sets')
 
     for data_set in value_sets:
@@ -61,10 +60,8 @@ if __name__ == "__main__":
         elif data_set is higher_dim:
             saveResultFile(cajas_df, knn_df, norms, N, n, m, 'naive_higherDims', silhouetteNaive, randNaive)
         elif data_set is umap2d:
-            saveResultFile(cajas_df, knn_df, norms, N, n, m, 'naive_umap2d', silhouetteNaive, randNaive)
+            saveResultFile(cajas_df, knn_df, norms, N, n, m, 'naive_umap2d', silhouetteNaive, randNaive)       
 
-            
-    '''
     print('Evaluating cluster centers: Mountain')
 
     sigma = [0.1,0.2,0.3]
@@ -113,6 +110,8 @@ if __name__ == "__main__":
         labels = createClusters(umap2d, centers, combinationsMtn[i][3])
         silhouetteMtn = silhouette(umap2d, labels); silhouettes.append(silhouetteMtn)
         randMtn = rand(target, labels); randScores.append(randMtn)
+        imgName = 'Mountain'+str(combinationsMtn[i][:-1])
+        plot2dClusters(umap2d, labels, imgName, combinationsMtn[i][3])
 
     maxSilhouette = np.array(silhouettes).argmax()
     maxRand = np.array(randScores).argmax()
@@ -158,8 +157,6 @@ if __name__ == "__main__":
     randScores = []
     centersArray = []
 
-    '''
-
     print('Evaluating cluster centers: Subtractive')
 
     ra = [0.1,0.3,0.5,0.7,0.9]
@@ -204,6 +201,8 @@ if __name__ == "__main__":
         labels = createClusters(umap2d, centers, combinationsSub[i][2])
         silhouetteMtn = silhouette(umap2d, labels); silhouettes.append(silhouetteMtn)
         randMtn = rand(target, labels); randScores.append(randMtn)
+        imgName = 'Subtractive'+str(combinationsSub[i][:-1])
+        plot2dClusters(umap2d, labels, imgName, combinationsSub[i][2])
 
     maxSilhouette = np.array(silhouettes).argmax()
     maxRand = np.array(randScores).argmax()
@@ -250,7 +249,5 @@ if __name__ == "__main__":
     centersArray = []  
 
     print('Evaluating clustering algorithms')
-
-    '''
 
     print('Done')
