@@ -10,6 +10,7 @@ import numpy as np
 import numpy.ma as ma
 from sklearn.metrics import silhouette_score
 from sklearn.metrics.cluster import rand_score
+from scipy.spatial.distance import cdist
 from distances import *
 from aux import *
 
@@ -233,11 +234,16 @@ def updateCenters(data, labels, K):
         centers[i,:] = np.mean(dataInCenter, axis=0)
     return centers
 
+
+
+
+
+
+
+
 '''
 Fuzzy and Probabilistic C-Means de https://github.com/holtskinner/PossibilisticCMeans/blob/master/cmeans.py
 '''
-
-from scipy.spatial.distance import cdist
 
 
 def _eta(u, d, m):
@@ -253,26 +259,10 @@ def _update_clusters(x, u, m):
     v = um.dot(x.T) / np.atleast_2d(um.sum(axis=1)).T
     return v
 
-
-def _hcm_criterion(x, v, n, m, metric):
-
-    d = cdist(x.T, v, metric=metric)
-
-    y = np.argmin(d, axis=1)
-
-    u = np.zeros((v.shape[0], x.shape[1]))
-
-    for i in range(x.shape[1]):
-        u[y[i]][i] = 1
-
-    return u, d
-
-
 def _fcm_criterion(x, v, n, m, metric):
 
-    d = cdist(x.T, v, metric=metric).T
-
-    # Sanitize Distances (Avoid Zeroes)
+    d = applyNorm(metric, x.T, data2=v).squeeze().T
+    d = d
     d = np.fmax(d, np.finfo(x.dtype).eps)
 
     exp = -2. / (m - 1)
@@ -285,7 +275,8 @@ def _fcm_criterion(x, v, n, m, metric):
 
 def _pcm_criterion(x, v, n, m, metric):
 
-    d = cdist(x.T, v, metric=metric)
+    d = applyNorm(metric, x.T, data2=v).squeeze()
+    d = d
     d = np.fmax(d, np.finfo(x.dtype).eps)
 
     d2 = (d ** 2) / n
@@ -341,11 +332,6 @@ def _cmeans(x, c, m, e, max_iterations, criterion_function, metric="euclidean", 
         t += 1
 
     return v[t], v[0], u[t - 1], u[0], d, t
-
-
-# Public Facing Functions
-def hcm(x, c, e, max_iterations, metric="euclidean", v0=None):
-    return _cmeans(x, c, 1, e, max_iterations, _hcm_criterion, metric, v0=v0)
 
 
 def fcm(x, c, m, e, max_iterations, metric="euclidean", v0=None):

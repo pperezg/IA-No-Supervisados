@@ -1,0 +1,89 @@
+Fuzzy C-Means:
+
+Best Rand: 0.603400447427293
+Best Silhouette: 0.47393057
+
+K, fuzzifier, norm --> Silhouette, Rand
+Values: (2, 1.2, 'euclid') --> Silhouette: 0.45377257 Rand: 0.508903803131991
+Values: (2, 1.2, 'manhattan') --> Silhouette: 0.4471994 Rand: 0.5249217002237136
+Values: (2, 1.2, 'mahalanobis') --> Silhouette: 0.44748098 Rand: 0.5246532438478747
+Values: (2, 1.2, 'lp') --> Silhouette: 0.44121495 Rand: 0.5109619686800895
+Values: (2, 1.4, 'euclid') --> Silhouette: 0.44748098 Rand: 0.5246532438478747
+Values: (2, 1.4, 'manhattan') --> Silhouette: 0.44979087 Rand: 0.5300223713646532
+Values: (2, 1.4, 'mahalanobis') --> Silhouette: 0.44815236 Rand: 0.5288590604026846
+Values: (2, 1.4, 'lp') --> Silhouette: 0.44121495 Rand: 0.5109619686800895
+Values: (2, 1.6, 'euclid') --> Silhouette: 0.44680065 Rand: 0.5203579418344519
+Values: (2, 1.6, 'manhattan') --> Silhouette: 0.44727787 Rand: 0.5225055928411633
+Values: (2, 1.6, 'mahalanobis') --> Silhouette: 0.44815236 Rand: 0.5288590604026846
+Values: (2, 1.6, 'lp') --> Silhouette: 0.4323649 Rand: 0.5268008948545861
+Values: (3, 1.2, 'euclid') --> Silhouette: 0.40229 Rand: 0.5691275167785235
+Values: (3, 1.2, 'manhattan') --> Silhouette: 0.3992329 Rand: 0.5775391498881431
+Values: (3, 1.2, 'mahalanobis') --> Silhouette: 0.39628667 Rand: 0.5727069351230425
+Values: (3, 1.2, 'lp') --> Silhouette: 0.46271184 Rand: 0.5562416107382551
+Values: (3, 1.4, 'euclid') --> Silhouette: 0.46850923 Rand: 0.5482774049217002
+Values: (3, 1.4, 'manhattan') --> Silhouette: 0.40074578 Rand: 0.5725279642058165
+Values: (3, 1.4, 'mahalanobis') --> Silhouette: 0.3993796 Rand: 0.5812975391498881
+Values: (3, 1.4, 'lp') --> Silhouette: 0.47393057 Rand: 0.5408501118568233
+Values: (3, 1.6, 'euclid') --> Silhouette: 0.40145326 Rand: 0.5727069351230425
+Values: (3, 1.6, 'manhattan') --> Silhouette: 0.3984981 Rand: 0.5762863534675615
+Values: (3, 1.6, 'mahalanobis') --> Silhouette: 0.47036132 Rand: 0.5503355704697986
+Values: (3, 1.6, 'lp') --> Silhouette: 0.36813295 Rand: 0.599642058165548
+Values: (4, 1.2, 'euclid') --> Silhouette: 0.4616369 Rand: 0.5923937360178971
+Values: (4, 1.2, 'manhattan') --> Silhouette: 0.38018718 Rand: 0.5829082774049217
+Values: (4, 1.2, 'mahalanobis') --> Silhouette: 0.45992705 Rand: 0.5948098434004474
+Values: (4, 1.2, 'lp') --> Silhouette: 0.45032185 Rand: 0.5959731543624162
+Values: (4, 1.4, 'euclid') --> Silhouette: 0.45972937 Rand: 0.5984787472035794
+Values: (4, 1.4, 'manhattan') --> Silhouette: 0.4566685 Rand: 0.5846979865771812
+Values: (4, 1.4, 'mahalanobis') --> Silhouette: 0.3199363 Rand: 0.603400447427293
+Values: (4, 1.4, 'lp') --> Silhouette: 0.45617452 Rand: 0.6
+Values: (4, 1.6, 'euclid') --> Silhouette: 0.3430778 Rand: 0.5872035794183446
+Values: (4, 1.6, 'manhattan') --> Silhouette: 0.35119143 Rand: 0.5929306487695749
+Values: (4, 1.6, 'mahalanobis') --> Silhouette: 0.45689803 Rand: 0.5925727069351231
+Values: (4, 1.6, 'lp') --> Silhouette: 0.44527024 Rand: 0.6020581655480984
+
+
+
+Probabilistic C-Means:
+
+Best Rand: 0.6554809843400448
+Best Silhouette: 0.44727787
+
+K, fuzzifier, norm --> Silhouette, Rand
+Values: (2, 1.2, 'euclid') --> Silhouette: 0.44462714 Rand: 0.5120357941834451
+Values: (2, 1.2, 'manhattan') --> Silhouette: 0.4430817 Rand: 0.5098881431767338
+Values: (2, 1.2, 'mahalanobis') --> Silhouette: 0.44629735 Rand: 0.5191946308724832
+Values: (2, 1.2, 'lp') --> Silhouette: 0.4330889 Rand: 0.5725279642058165
+Values: (2, 1.4, 'euclid') --> Silhouette: 0.44727787 Rand: 0.5225055928411633
+Values: (2, 1.4, 'manhattan') --> Silhouette: 0.43352538 Rand: 0.5353914988814318
+Values: (2, 1.4, 'mahalanobis') --> Silhouette: 0.44727787 Rand: 0.5225055928411633
+Values: (2, 1.4, 'lp') --> Silhouette: 0.43311107 Rand: 0.5661744966442953
+Values: (2, 1.6, 'euclid') --> Silhouette: 0.44649425 Rand: 0.5296644295302013
+Values: (2, 1.6, 'manhattan') --> Silhouette: 0.4430817 Rand: 0.5098881431767338
+Values: (2, 1.6, 'mahalanobis') --> Silhouette: 0.43428904 Rand: 0.5525727069351231
+Values: (2, 1.6, 'lp') --> Silhouette: 0.43056905 Rand: 0.5611633109619687
+Values: (3, 1.2, 'euclid') --> Silhouette: 0.4189086 Rand: 0.534586129753915
+Values: (3, 1.2, 'manhattan') --> Silhouette: 0.42431402 Rand: 0.5829082774049217
+Values: (3, 1.2, 'mahalanobis') --> Silhouette: 0.0038523707 Rand: 0.5412975391498881
+Values: (3, 1.2, 'lp') --> Silhouette: 0.4465749 Rand: 0.5551677852348993
+Values: (3, 1.4, 'euclid') --> Silhouette: 0.4110205 Rand: 0.5306487695749441
+Values: (3, 1.4, 'manhattan') --> Silhouette: 0.38729867 Rand: 0.5954362416107383
+Values: (3, 1.4, 'mahalanobis') --> Silhouette: 0.005689327 Rand: 0.5386129753914989
+Values: (3, 1.4, 'lp') --> Silhouette: 0.2236852 Rand: 0.5954362416107383
+Values: (3, 1.6, 'euclid') --> Silhouette: 0.2694313 Rand: 0.6009843400447428
+Values: (3, 1.6, 'manhattan') --> Silhouette: 0.0355493 Rand: 0.5468456375838926
+Values: (3, 1.6, 'mahalanobis') --> Silhouette: 0.2909869 Rand: 0.6080536912751678
+Values: (3, 1.6, 'lp') --> Silhouette: 0.26385972 Rand: 0.6076062639821029
+Values: (4, 1.2, 'euclid') --> Silhouette: 0.36234853 Rand: 0.5769127516778524
+Values: (4, 1.2, 'manhattan') --> Silhouette: 0.05638442 Rand: 0.5550782997762863
+Values: (4, 1.2, 'mahalanobis') --> Silhouette: 0.41631106 Rand: 0.5322595078299777
+Values: (4, 1.2, 'lp') --> Silhouette: 0.32481205 Rand: 0.5582102908277405
+Values: (4, 1.4, 'euclid') --> Silhouette: 0.055132747 Rand: 0.6334675615212528
+Values: (4, 1.4, 'manhattan') --> Silhouette: 0.015221423 Rand: 0.6031319910514541
+Values: (4, 1.4, 'mahalanobis') --> Silhouette: 0.02476915 Rand: 0.6346308724832215
+Values: (4, 1.4, 'lp') --> Silhouette: -0.039635472 Rand: 0.6554809843400448
+Values: (4, 1.6, 'euclid') --> Silhouette: 0.30131027 Rand: 0.6102908277404921
+Values: (4, 1.6, 'manhattan') --> Silhouette: 0.04880333 Rand: 0.5535570469798657
+Values: (4, 1.6, 'mahalanobis') --> Silhouette: 0.21041451 Rand: 0.6045637583892618
+Values: (4, 1.6, 'lp') --> Silhouette: 0.34177768 Rand: 0.6246085011185682
+
+ By: Paulina Pérez Garcés

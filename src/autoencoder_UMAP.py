@@ -8,21 +8,21 @@ mp = SourceFileLoader("umap_", "venvIA/lib/python3.9/site-packages/umap/umap_.py
 
 class AutoEncoders(Model):
 
-  def __init__(self, output_units):
+  def __init__(self, output_units, dims):
 
     super().__init__()
     self.encoder = Sequential(
         [
-          Dense(4, activation="relu"),
-          Dense(4, activation="relu"),
-          Dense(5, activation="relu")
+          Dense(dims, activation="relu"),
+          Dense(dims, activation="relu"),
+          Dense(dims+1, activation="relu")
         ]
     )
 
     self.decoder = Sequential(
         [
-          Dense(4, activation="relu"),
-          Dense(4, activation="relu"),
+          Dense(dims, activation="relu"),
+          Dense(dims, activation="relu"),
           Dense(output_units, activation="sigmoid")
         ]
     )
@@ -33,11 +33,11 @@ class AutoEncoders(Model):
     decoded = self.decoder(encoded)
     return decoded
 
-def get_MLP_encoding(data):
+def get_MLP_encoding(data, dims):
     
   data = pd.DataFrame(data)
 
-  auto_encoder = AutoEncoders(len(data.columns))
+  auto_encoder = AutoEncoders(len(data.columns), dims)
 
   auto_encoder.compile(loss='mae', metrics=['mae'], optimizer='adam')
 

@@ -71,6 +71,17 @@ def getData():
             else: #Removes rows with NaN values
                 data = data.dropna(axis=0, how='all')
 
+        #Asks if there are any columns to Drop
+        print('Do you want to drop any columns? (y/n)')
+        ans3 = input()
+        while ans3=='y':
+            print('Please, enter the number of column to drop:')
+            toDrop = input()
+            data = data.drop(data.columns[int(toDrop)], axis=1)
+            print(data)
+            print('Do you want to drop any other columns? (y/n)')
+            ans3 = input()
+
         #Divides the data into features and labels
         features = data.iloc[:,:-1]
         target = data.iloc[:,-1]
@@ -223,6 +234,44 @@ def saveResultFileKmeans(combinatoria, name, silhouette, rand):
             f.write('Values: '+str(combinatoria[i])+' --> ')
             f.write('Silhouette: '+str(silhouette[i])+' ')
             f.write('Rand: '+str(rand[i])+'\n')
+
+        f.write('\n By: Paulina Pérez Garcés')
+
+    print('Results saved in '+resultPath) #Prints the path to the results file
+
+def saveResultFileCMeans(combinatoria, name, silhouetteFCM, randFCM, silhouettePCM, randPCM):
+    #Gets the current date and time, sets results path accordingly
+    now = datetime.now()
+    dt_string = now.strftime("%d-%m-%Y %H:%M:%S")
+    resultPath = 'src/results/results_CMeans_' + name + '_'+ dt_string + '.txt'
+
+    bestRandFCM = np.max(randFCM)
+    bestSilFCM = np.max(silhouetteFCM)
+    bestRandPCM = np.max(randPCM)
+    bestSilPCM = np.max(silhouettePCM)
+
+    #Opens the file and writes the results
+    with open(resultPath, 'w') as f:
+
+        f.write('Fuzzy C-Means:\n\n')
+
+        f.write('Best Rand: '+str(bestRandFCM)+'\n')
+        f.write('Best Silhouette: '+str(bestSilFCM)+'\n\n')
+        f.write('K, fuzzifier, norm --> Silhouette, Rand' +'\n')
+        for i in range(len(combinatoria)):
+            f.write('Values: '+str(combinatoria[i])+' --> ')
+            f.write('Silhouette: '+str(silhouetteFCM[i])+' ')
+            f.write('Rand: '+str(randFCM[i])+'\n')
+
+        f.write('\n\n\nProbabilistic C-Means:\n\n')
+
+        f.write('Best Rand: '+str(bestRandPCM)+'\n')
+        f.write('Best Silhouette: '+str(bestSilPCM)+'\n\n')
+        f.write('K, fuzzifier, norm --> Silhouette, Rand' +'\n')
+        for i in range(len(combinatoria)):
+            f.write('Values: '+str(combinatoria[i])+' --> ')
+            f.write('Silhouette: '+str(silhouettePCM[i])+' ')
+            f.write('Rand: '+str(randPCM[i])+'\n')
 
         f.write('\n By: Paulina Pérez Garcés')
 
