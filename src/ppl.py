@@ -26,6 +26,8 @@ if __name__ == "__main__":
     value_sets = [features, higher_dim, umap2d] #List of data sets
     ogClusters = len(set(target)) #Number of original clusters
 
+    '''
+
     print('Evaluating Naive Data Sets')
 
     #Lists to store the results of the algorithms
@@ -63,11 +65,13 @@ if __name__ == "__main__":
         elif data_set is umap2d:
             saveResultFile(cajas_df, knn_df, norms, N, n, m, 'naive_umap2d', silhouetteNaive, randNaive)       
 
+    '''
+
     print('Evaluating cluster centers: Mountain')
 
-    sigma = [0.1,0.2,0.3]
+    sigma = [0.1,0.2]
     numClusters = [ogClusters-1,ogClusters,ogClusters+1]
-    gridPoints = [5,7]
+    gridPoints = [2,3]
     silhouettes = []
     randScores = []
     centersArray = []

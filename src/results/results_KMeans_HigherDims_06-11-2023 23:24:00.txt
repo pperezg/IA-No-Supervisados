@@ -1,0 +1,18 @@
+Best Rand: 0.9292699626648753
+Best Silhouette: 0.7656078338623047
+
+K, Norm --> Silhouette, Rand
+Values: (1, 'euclid') --> Silhouette: -1 Rand: 0.5440679352857838
+Values: (1, 'manhattan') --> Silhouette: -1 Rand: 0.5440679352857838
+Values: (1, 'mahalanobis') --> Silhouette: -1 Rand: 0.5440679352857838
+Values: (1, 'lp') --> Silhouette: -1 Rand: 0.5440679352857838
+Values: (2, 'euclid') --> Silhouette: 0.7655901 Rand: 0.9265527234832337
+Values: (2, 'manhattan') --> Silhouette: -1 Rand: 0.5440679352857838
+Values: (2, 'mahalanobis') --> Silhouette: 0.7655901 Rand: 0.9265527234832337
+Values: (2, 'lp') --> Silhouette: 0.76560783 Rand: 0.9292699626648753
+Values: (3, 'euclid') --> Silhouette: 0.6929604 Rand: 0.8937176224372473
+Values: (3, 'manhattan') --> Silhouette: 0.6929604 Rand: 0.8937176224372473
+Values: (3, 'mahalanobis') --> Silhouette: 0.6929604 Rand: 0.8937176224372473
+Values: (3, 'lp') --> Silhouette: 0.6927226 Rand: 0.8937563786220885
+
+ By: Paulina Pérez Garcés
