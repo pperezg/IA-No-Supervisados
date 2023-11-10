@@ -65,7 +65,7 @@ if __name__ == "__main__":
         elif data_set is umap2d:
             saveResultFile(cajas_df, knn_df, norms, N, n, m, 'naive_umap2d', silhouetteNaive, randNaive)       
 
-    '''
+    
 
     print('Evaluating cluster centers: Mountain')
 
@@ -292,6 +292,8 @@ if __name__ == "__main__":
         silhouetteKNN = silhouette(higher_dim, labels); silhouettes.append(silhouetteKNN)
         randKNN = rand(target, labels); randScores.append(randKNN)
     saveResultFileKmeans(combinationsKMeans, 'HigherDims', silhouettes, randScores)
+
+    '''
 
     print('Evaluating clustering algorithms: Fuzzy C Means')
 

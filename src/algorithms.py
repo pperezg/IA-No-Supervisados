@@ -263,7 +263,10 @@ def _fcm_criterion(x, v, n, m, metric):
 
     d = applyNorm(metric, x.T, data2=v).squeeze().T
     d = d
-    d = np.fmax(d, np.finfo(x.dtype).eps)
+    try:
+        d = np.fmax(d, np.finfo(x.dtype).eps)
+    except:
+        pass
 
     exp = -2. / (m - 1)
     d2 = d ** exp
@@ -277,7 +280,10 @@ def _pcm_criterion(x, v, n, m, metric):
 
     d = applyNorm(metric, x.T, data2=v).squeeze()
     d = d
-    d = np.fmax(d, np.finfo(x.dtype).eps)
+    try:
+        d = np.fmax(d, np.finfo(x.dtype).eps)
+    except:
+        pass
 
     d2 = (d ** 2) / n
     exp = 1. / (m - 1)
