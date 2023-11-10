@@ -268,7 +268,7 @@ def saveResultFileCMeans(combinatoria, name, silhouetteFCM, randFCM, silhouetteP
         f.write('Best Rand: '+str(bestRandPCM)+'\n')
         f.write('Best Silhouette: '+str(bestSilPCM)+'\n\n')
         f.write('K, fuzzifier, norm --> Silhouette, Rand' +'\n')
-        for i in range(len(combinatoria)):
+        for i in range(len(silhouettePCM)):
             f.write('Values: '+str(combinatoria[i])+' --> ')
             f.write('Silhouette: '+str(silhouettePCM[i])+' ')
             f.write('Rand: '+str(randPCM[i])+'\n')

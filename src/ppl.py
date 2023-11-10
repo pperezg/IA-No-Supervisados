@@ -304,7 +304,7 @@ if __name__ == "__main__":
 
     combinationsFuzzy = list(itertools.product(clusters, fuzzifier, norms))
 
-
+    '''
     print('Normal Dimensions')
 
     randFCM = []; silhouetteFCM = []
@@ -345,10 +345,11 @@ if __name__ == "__main__":
         plot2dClusters(umap2d, labelsPCM, imgName, combinationsFuzzy[i][2])
     saveResultFileCMeans(combinationsFuzzy, 'UMAP', silhouetteFCM, randFCM, silhouettePCM, randPCM)
 
+    '''
     print('Higher Dimensions')
 
     randFCM = []; silhouetteFCM = []
-    randPCM = []; silhouettePCM = []
+    randPCM = [0]; silhouettePCM = [0]
 
     for i in range(len(combinationsFuzzy)):
         print('Currently running combination '+str(i+1)+' of '+str(len(combinationsFuzzy)))
@@ -357,10 +358,10 @@ if __name__ == "__main__":
         silhouetteFCM.append(silhouette(higher_dim, labelsFCM))
         randFCM.append(rand(target, labelsFCM))
 
-        centersPCM = pcm(higher_dim.T, combinationsFuzzy[i][0], combinationsFuzzy[i][1], error, maxiter, combinationsFuzzy[i][2])[0]
-        labelsPCM = createClusters(higher_dim, centersPCM, combinationsFuzzy[i][2])
-        silhouettePCM.append(silhouette(higher_dim, labelsPCM))
-        randPCM.append(rand(target, labelsPCM))
+        #centersPCM = pcm(higher_dim.T, combinationsFuzzy[i][0], combinationsFuzzy[i][1], error, maxiter, combinationsFuzzy[i][2])[0]
+        #labelsPCM = createClusters(higher_dim, centersPCM, combinationsFuzzy[i][2])
+        #silhouettePCM.append(silhouette(higher_dim, labelsPCM))
+        #randPCM.append(rand(target, labelsPCM))
     saveResultFileCMeans(combinationsFuzzy, 'HigherDims', silhouetteFCM, randFCM, silhouettePCM, randPCM)
 
     print('Done')

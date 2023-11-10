@@ -1,0 +1,54 @@
+Fuzzy C-Means:
+
+Best Rand: 0.8791151532376487
+Best Silhouette: 0.7634725570678711
+
+K, fuzzifier, norm --> Silhouette, Rand
+Values: (1, 1.2, 'euclid') --> Silhouette: -1 Rand: 0.5440679352857838
+Values: (1, 1.2, 'manhattan') --> Silhouette: -1 Rand: 0.5440679352857838
+Values: (1, 1.2, 'mahalanobis') --> Silhouette: -1 Rand: 0.5440679352857838
+Values: (1, 1.2, 'lp') --> Silhouette: -1 Rand: 0.5440679352857838
+Values: (1, 1.4, 'euclid') --> Silhouette: -1 Rand: 0.5440679352857838
+Values: (1, 1.4, 'manhattan') --> Silhouette: -1 Rand: 0.5440679352857838
+Values: (1, 1.4, 'mahalanobis') --> Silhouette: -1 Rand: 0.5440679352857838
+Values: (1, 1.4, 'lp') --> Silhouette: -1 Rand: 0.5440679352857838
+Values: (1, 1.6, 'euclid') --> Silhouette: -1 Rand: 0.5440679352857838
+Values: (1, 1.6, 'manhattan') --> Silhouette: -1 Rand: 0.5440679352857838
+Values: (1, 1.6, 'mahalanobis') --> Silhouette: -1 Rand: 0.5440679352857838
+Values: (1, 1.6, 'lp') --> Silhouette: -1 Rand: 0.5440679352857838
+Values: (2, 1.2, 'euclid') --> Silhouette: 0.76347256 Rand: 0.8791151532376487
+Values: (2, 1.2, 'manhattan') --> Silhouette: 0.76347256 Rand: 0.8791151532376487
+Values: (2, 1.2, 'mahalanobis') --> Silhouette: 0.76347256 Rand: 0.8791151532376487
+Values: (2, 1.2, 'lp') --> Silhouette: 0.76301354 Rand: 0.8765615512808919
+Values: (2, 1.4, 'euclid') --> Silhouette: 0.76301354 Rand: 0.8765615512808919
+Values: (2, 1.4, 'manhattan') --> Silhouette: 0.76301354 Rand: 0.8765615512808919
+Values: (2, 1.4, 'mahalanobis') --> Silhouette: 0.76301354 Rand: 0.8765615512808919
+Values: (2, 1.4, 'lp') --> Silhouette: 0.7624651 Rand: 0.8791151532376487
+Values: (2, 1.6, 'euclid') --> Silhouette: 0.7624651 Rand: 0.8791151532376487
+Values: (2, 1.6, 'manhattan') --> Silhouette: 0.7624651 Rand: 0.8791151532376487
+Values: (2, 1.6, 'mahalanobis') --> Silhouette: 0.7624651 Rand: 0.8791151532376487
+Values: (2, 1.6, 'lp') --> Silhouette: 0.76188576 Rand: 0.8765615512808919
+Values: (3, 1.2, 'euclid') --> Silhouette: 0.7469213 Rand: 0.8668854237988812
+Values: (3, 1.2, 'manhattan') --> Silhouette: 0.7469213 Rand: 0.8668854237988812
+Values: (3, 1.2, 'mahalanobis') --> Silhouette: 0.7469213 Rand: 0.8668854237988812
+Values: (3, 1.2, 'lp') --> Silhouette: 0.7469213 Rand: 0.8668854237988812
+Values: (3, 1.4, 'euclid') --> Silhouette: 0.7469213 Rand: 0.8668854237988812
+Values: (3, 1.4, 'manhattan') --> Silhouette: 0.7469213 Rand: 0.8668854237988812
+Values: (3, 1.4, 'mahalanobis') --> Silhouette: 0.7469213 Rand: 0.8668854237988812
+Values: (3, 1.4, 'lp') --> Silhouette: 0.7469213 Rand: 0.8668854237988812
+Values: (3, 1.6, 'euclid') --> Silhouette: 0.7469213 Rand: 0.8668854237988812
+Values: (3, 1.6, 'manhattan') --> Silhouette: 0.7469213 Rand: 0.8668854237988812
+Values: (3, 1.6, 'mahalanobis') --> Silhouette: 0.7469213 Rand: 0.8668854237988812
+Values: (3, 1.6, 'lp') --> Silhouette: 0.7468591 Rand: 0.8645686651939316
+
+
+
+Probabilistic C-Means:
+
+Best Rand: 0
+Best Silhouette: 0
+
+K, fuzzifier, norm --> Silhouette, Rand
+Values: (1, 1.2, 'euclid') --> Silhouette: 0 Rand: 0
+
+ By: Paulina Pérez Garcés
