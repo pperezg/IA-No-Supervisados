@@ -22,6 +22,8 @@ if __name__ == "__main__":
         #Installation of all the necessary packages
         run(["venvIA/bin/python", "-m", "pip", "install", "--upgrade", "pip"])
         run(["venvIA/bin/pip", "install", "-r", "./src/requirements.txt"])
+        #Runing the project files using the virtual environment
+        run(["venvIA/bin/python", "src/ppl.py"])
 
     if osInfo=='W':
         #Creation of the virtual environment
@@ -29,6 +31,7 @@ if __name__ == "__main__":
         #Installation of all the necessary packages
         run(["venvIA/Scripts/python.exe", "-m", "pip", "install", "--upgrade", "pip"])
         run(["venvIA/Scripts/pip.exe", "install", "-r", "./src/requirements.txt"])
+        #Runing the project files using the virtual environment
+        run(["venvIA/Scripts/python.exe", "src/ppl.py"])
 
-    #Runing the project files using the virtual environment
-    run(["venvIA/bin/python", "src/ppl.py"])
+    
