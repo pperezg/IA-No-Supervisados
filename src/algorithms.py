@@ -12,7 +12,7 @@ from sklearn.metrics import silhouette_score
 from sklearn.metrics.cluster import rand_score
 from scipy.spatial.distance import cdist
 from distances import *
-from aux import *
+from auxiliar import *
 
 '''
 Function: pseudo_knn

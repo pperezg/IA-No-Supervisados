@@ -12,7 +12,7 @@ if __name__ == "__main__":
     from distances import *
     from data import *
     from autoencoder_UMAP import *
-    from aux import *
+    from auxiliar import *
     import itertools
 
     features, target = getData() #Get and organizes the data
