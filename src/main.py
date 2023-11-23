@@ -16,8 +16,9 @@ if __name__ == "__main__":
     if createvenv=='y':
         #Creation of the virtual environment
         run(["python", "-m", "venv", "venvIA"])
-        #Popen(["source ", "venvIA/bin/activate"],shell=True)
+        #Installation of all the necessary packages
         run(["venvIA/bin/python", "-m", "pip", "install", "--upgrade", "pip"])
         run(["venvIA/bin/pip", "install", "-r", "./src/requirements.txt"])
 
+    #Runing the project files using the virtual environment
     run(["venvIA/bin/python", "src/ppl.py"])

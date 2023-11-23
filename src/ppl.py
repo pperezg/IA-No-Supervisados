@@ -1,9 +1,8 @@
 '''
 Paulina Pérez Garcés
 
-main.py is the main file of the project. It imports all the necessary modules 
-and runs the algorithms. It also creates a virtual environment and installs all
-the necessary packages.
+ppl.py is the file that ties all necessary procedures together. If no virtual
+environment were needed, it would serve as the main file in the project.
 '''
 
 if __name__ == "__main__":
@@ -26,9 +25,8 @@ if __name__ == "__main__":
     value_sets = [features, higher_dim, umap2d] #List of data sets
     ogClusters = len(set(target)) #Number of original clusters
 
-    '''
 
-    print('Evaluating Naive Data Sets')
+    print('Evaluating Naive Models')
 
     #Lists to store the results of the algorithms
     cajas_df = []
@@ -44,16 +42,19 @@ if __name__ == "__main__":
             maxDistance = np.amax(norm) #Gets the max distance
             groups_cajas = boxes(norm, maxDistance*0.45) #Applies the boxes algorithm
             groups_knn = pseudo_knn(norm, 50) #Applies the knn-like algorithm
-            cajas_df.append(groups_cajas) #Stores the results
+            #Stores the results
+            cajas_df.append(groups_cajas) 
             knn_df.append(groups_knn)
+            #Turns results into the desired output format
             labelsCajas = olga2Labels(groups_cajas)
             labelsKnn = olga2Labels(groups_knn)
+            #Calculates the silhouette and rand scores
             silhouetteNaive[0].append(silhouette(data_set, labelsCajas))
             silhouetteNaive[1].append(silhouette(data_set, labelsKnn))
             randNaive[0].append(rand(target, labelsCajas))
             randNaive[1].append(rand(target, labelsKnn))
 
-            if data_set is umap2d:
+            if data_set is umap2d: #If dataset is 2d, graphs the results
                 plot2dClusters(data_set, labelsCajas, 'Naive boxes', norma)
                 plot2dClusters(data_set, labelsKnn, 'Pseudo KNN', norma)
         
@@ -69,13 +70,13 @@ if __name__ == "__main__":
 
     print('Evaluating cluster centers: Mountain')
 
+    #Parameters for the mountain algorithm
     sigma = [0.1,0.2]
     numClusters = [ogClusters-1,ogClusters,ogClusters+1]
     gridPoints = [2,3]
     silhouettes = []
     randScores = []
     centersArray = []
-
     combinationsMtn = list(itertools.product(sigma, numClusters, gridPoints, norms))
 
     print('Normal Dimensions')
@@ -84,16 +85,18 @@ if __name__ == "__main__":
     for i in range(len(combinationsMtn)):
         print('Currently running combination '+str(i+1)+' of '+str(len(combinationsMtn)))
         centers = mountain(features, combinationsMtn[i][0], combinationsMtn[i][0]*1.5, combinationsMtn[i][1], combinationsMtn[i][3], gridPoints=combinationsMtn[i][2])
-        centersArray.append(centers)
-        labels = createClusters(features, centers, combinationsMtn[i][3])
-        silhouetteMtn = silhouette(features, labels); silhouettes.append(silhouetteMtn)
+        centersArray.append(centers) #Stores the centers
+        labels = createClusters(features, centers, combinationsMtn[i][3]) #Creates the clusters
+        #Calculates the silhouette and rand scores
+        silhouetteMtn = silhouette(features, labels); silhouettes.append(silhouetteMtn) 
         randMtn = rand(target, labels); randScores.append(randMtn)
 
+    #Finds iteration with the best max silhouette and max rand scores
     maxSilhouette = np.array(silhouettes).argmax()
     maxRand = np.array(randScores).argmax()
-    if maxSilhouette==maxRand:
+    if maxSilhouette==maxRand: #If both are the same, chooses that iteration
         bestNormalDims = centersArray[maxSilhouette]
-    else:
+    else: #If not, chooses the one with the best silhouette score
         auxSilhouette = silhouettes[maxSilhouette]
         auxRand = silhouettes[maxRand]
         auxMax = max(auxSilhouette, auxRand)
@@ -101,12 +104,12 @@ if __name__ == "__main__":
             bestNormalDims = centersArray[maxSilhouette]
         else:
             bestNormalDims = centersArray[maxRand]
-    saveResultFileMtn(combinationsMtn, 'NormalDims', silhouettes, randScores, bestNormalDims)
+    saveResultFileMtn(combinationsMtn, 'NormalDims', silhouettes, randScores, bestNormalDims) #Saves the results to .txt files
     silhouettes = []
     randScores = []
     centersArray = []
 
-    print('UMAP')
+    print('UMAP') #Repetition of the same procedure for dataset in 2D
 
     for i in range(len(combinationsMtn)):
         print('Currently running combination '+str(i+1)+' of '+str(len(combinationsMtn)))
@@ -135,7 +138,7 @@ if __name__ == "__main__":
     randScores = []
     centersArray = []
 
-    print('Higher Dimensions')
+    print('Higher Dimensions') #Repeticion of the same procedure for dataset in higher dimensions
 
     for i in range(len(combinationsMtn)):
         print('Currently running combination '+str(i+1)+' of '+str(len(combinationsMtn)))
@@ -164,6 +167,7 @@ if __name__ == "__main__":
 
     print('Evaluating cluster centers: Subtractive')
 
+    #Parameters for the subtractive algorithm
     ra = [0.1,0.3,0.5,0.7,0.9]
     combinationsSub = list(itertools.product(ra, numClusters, norms))
     silhouettes = []
@@ -175,16 +179,18 @@ if __name__ == "__main__":
     for i in range(len(combinationsSub)):
         print('Currently running combination '+str(i+1)+' of '+str(len(combinationsSub)))
         centers = subtractive(features, combinationsSub[i][0], 1.5, combinationsSub[i][1], combinationsSub[i][2])
-        centersArray.append(centers)
-        labels = createClusters(features, centers, combinationsSub[i][2])
+        centersArray.append(centers) #Stores the centers
+        labels = createClusters(features, centers, combinationsSub[i][2]) #Creates the clusters
+        #Calculates the silhouette and rand scores
         silhouetteMtn = silhouette(features, labels); silhouettes.append(silhouetteMtn)
         randMtn = rand(target, labels); randScores.append(randMtn)
 
+    #Finds iteration with the best max silhouette and max rand scores
     maxSilhouette = np.array(silhouettes).argmax()
     maxRand = np.array(randScores).argmax()
-    if maxSilhouette==maxRand:
+    if maxSilhouette==maxRand: #If both are the same, chooses that iteration
         bestNormalDims = centersArray[maxSilhouette]
-    else:
+    else: #If not, chooses the one with the best silhouette score
         auxSilhouette = silhouettes[maxSilhouette]
         auxRand = silhouettes[maxRand]
         auxMax = max(auxSilhouette, auxRand)
@@ -192,12 +198,12 @@ if __name__ == "__main__":
             bestNormalDims = centersArray[maxSilhouette]
         else:
             bestNormalDims = centersArray[maxRand]
-    saveResultFileSub(combinationsSub, 'NormalDims', silhouettes, randScores, bestNormalDims)
+    saveResultFileSub(combinationsSub, 'NormalDims', silhouettes, randScores, bestNormalDims) #Saves the results to .txt files
     silhouettes = []
     randScores = []
     centersArray = []  
 
-    print('UMAP')
+    print('UMAP') #Repetition of the same procedure for dataset in 2D
 
     for i in range(len(combinationsSub)):
         print('Currently running combination '+str(i+1)+' of '+str(len(combinationsSub)))
@@ -226,7 +232,7 @@ if __name__ == "__main__":
     randScores = []
     centersArray = []   
 
-    print('Higher Dimensions')
+    print('Higher Dimensions') #Repeticion of the same procedure for dataset in higher dimensions
 
     for i in range(len(combinationsSub)):
         print('Currently running combination '+str(i+1)+' of '+str(len(combinationsSub)))
@@ -253,8 +259,8 @@ if __name__ == "__main__":
     randScores = []
     centersArray = []  
 
-    print('Evaluating clustering algorithms: KMeans')
-
+    print('Evaluating clustering algorithms: KMeans') 
+    # Parameters for the KMeans algorithm
     K = [ogClusters-1,ogClusters,ogClusters+1]
     combinationsKMeans = list(itertools.product(K, norms))
     silhouettes = []
@@ -264,12 +270,13 @@ if __name__ == "__main__":
 
     for i in range(len(combinationsKMeans)):
         print('Currently running combination '+str(i+1)+' of '+str(len(combinationsKMeans)))
-        labels = kmeans(features, combinationsKMeans[i][0], combinationsKMeans[i][1])
+        labels = kmeans(features, combinationsKMeans[i][0], combinationsKMeans[i][1]) #Applies the KMeans algorithm
+        #Calculates the silhouette and rand scores
         silhouetteKNN = silhouette(features, labels); silhouettes.append(silhouetteKNN)
         randKNN = rand(target, labels); randScores.append(randKNN)
-    saveResultFileKmeans(combinationsKMeans, 'NormalDims', silhouettes, randScores)
+    saveResultFileKmeans(combinationsKMeans, 'NormalDims', silhouettes, randScores) #Saves the results to .txt files
 
-    print('UMAP')
+    print('UMAP') #Repetition of the same procedure for dataset in 2D
     silhouettes = []
     randScores = []
 
@@ -282,7 +289,7 @@ if __name__ == "__main__":
         plot2dClusters(umap2d, labels, imgName, combinationsKMeans[i][1])
     saveResultFileKmeans(combinationsKMeans, 'UMAP', silhouettes, randScores)
 
-    print('Higher Dimensions')
+    print('Higher Dimensions') #Repeticion of the same procedure for dataset in higher dimensions
     silhouettes = []
     randScores = []
 
@@ -293,10 +300,9 @@ if __name__ == "__main__":
         randKNN = rand(target, labels); randScores.append(randKNN)
     saveResultFileKmeans(combinationsKMeans, 'HigherDims', silhouettes, randScores)
 
-    '''
 
-    print('Evaluating clustering algorithms: Fuzzy C Means')
-
+    print('Evaluating clustering algorithms: Fuzzy C Means and Probabilistic C Means')
+    # Parameters for the Fuzzy C Means and Probabilistic C Means algorithms
     clusters = [ogClusters-1,ogClusters,ogClusters+1]
     fuzzifier = [1.2, 1.4, 1.6]
     error = 0.001
@@ -304,7 +310,6 @@ if __name__ == "__main__":
 
     combinationsFuzzy = list(itertools.product(clusters, fuzzifier, norms))
 
-    '''
     print('Normal Dimensions')
 
     randFCM = []; silhouetteFCM = []
@@ -312,18 +317,20 @@ if __name__ == "__main__":
     
     for i in range(len(combinationsFuzzy)):
         print('Currently running combination '+str(i+1)+' of '+str(len(combinationsFuzzy)))
-        centersFCM = fcm(features.T, combinationsFuzzy[i][0], combinationsFuzzy[i][1], error, maxiter, combinationsFuzzy[i][2])[0]
-        labelsFCM = createClusters(features, centersFCM, combinationsFuzzy[i][2])
+        centersFCM = fcm(features.T, combinationsFuzzy[i][0], combinationsFuzzy[i][1], error, maxiter, combinationsFuzzy[i][2])[0] #Applies the Fuzzy C Means algorithm
+        labelsFCM = createClusters(features, centersFCM, combinationsFuzzy[i][2]) #Creates the clusters
+        #Calculates the silhouette and rand scores
         silhouetteFCM.append(silhouette(features, labelsFCM))
         randFCM.append(rand(target, labelsFCM))
 
-        centersPCM = pcm(features.T, combinationsFuzzy[i][0], combinationsFuzzy[i][1], error, maxiter, combinationsFuzzy[i][2])[0]
-        labelsPCM = createClusters(features, centersPCM, combinationsFuzzy[i][2])
+        centersPCM = pcm(features.T, combinationsFuzzy[i][0], combinationsFuzzy[i][1], error, maxiter, combinationsFuzzy[i][2])[0] #Applies the Probabilistic C Means algorithm
+        labelsPCM = createClusters(features, centersPCM, combinationsFuzzy[i][2]) #Creates the clusters
+        #Calculates the silhouette and rand scores
         silhouettePCM.append(silhouette(features, labelsPCM))
         randPCM.append(rand(target, labelsPCM))
-    saveResultFileCMeans(combinationsFuzzy, 'NormalDims', silhouetteFCM, randFCM, silhouettePCM, randPCM)
+    saveResultFileCMeans(combinationsFuzzy, 'NormalDims', silhouetteFCM, randFCM, silhouettePCM, randPCM) #Saves the results to .txt files
 
-    print('UMAP')
+    print('UMAP') #Repetition of the same procedure for dataset in 2D
 
     randFCM = []; silhouetteFCM = []
     randPCM = []; silhouettePCM = []
@@ -345,8 +352,7 @@ if __name__ == "__main__":
         plot2dClusters(umap2d, labelsPCM, imgName, combinationsFuzzy[i][2])
     saveResultFileCMeans(combinationsFuzzy, 'UMAP', silhouetteFCM, randFCM, silhouettePCM, randPCM)
 
-    '''
-    print('Higher Dimensions')
+    print('Higher Dimensions') #Repeticion of the same procedure for dataset in higher dimensions
 
     randFCM = []; silhouetteFCM = []
     randPCM = [0]; silhouettePCM = [0]
