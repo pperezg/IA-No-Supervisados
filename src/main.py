@@ -16,14 +16,14 @@ if __name__ == "__main__":
     while osInfo not in ['L', 'M', 'W']:
         osInfo = input('Please indicate your OS: Linux (L), MacOS (M), Windows (W) \n')
 
-    if createvenv=='M' or createvenv=='L':
+    if osInfo=='M' or osInfo=='L':
         #Creation of the virtual environment
         run(["python", "-m", "venv", "venvIA"])
         #Installation of all the necessary packages
         run(["venvIA/bin/python", "-m", "pip", "install", "--upgrade", "pip"])
         run(["venvIA/bin/pip", "install", "-r", "./src/requirements.txt"])
 
-    if createvenv=='W':
+    if osInfo=='W':
         #Creation of the virtual environment
         run(["python", "-m", "venv", "venvIA"])
         #Installation of all the necessary packages
