@@ -1,8 +1,19 @@
+# Importing libraries needed for this file
 import numpy as np
 import seaborn as sns
 import matplotlib.pyplot as plt
 from distances import *
 
+'''
+Function: olga2Labels
+
+Description: Tranforms output format required by Professor Olga into labels
+
+Parameters: results (list)
+*results: list of lists with the results of the algorithms 
+
+Returns: resultsLabels (list)
+'''
 def olga2Labels(results):
     resultLabels = []
     for i in range(len(results)):
