@@ -1,3 +1,4 @@
+# Importación de las librerías necesarias para este file
 import pandas as pd
 from tensorflow.keras import Model
 from tensorflow.keras import Sequential
@@ -6,12 +7,13 @@ from tensorflow.keras.layers import Dense
 from importlib.machinery import SourceFileLoader
 mp = SourceFileLoader("umap_", "venvIA/lib/python3.9/site-packages/umap/umap_.py").load_module()
 
+#Clase autoencoder
 class AutoEncoders(Model):
 
   def __init__(self, output_units, dims):
 
     super().__init__()
-    self.encoder = Sequential(
+    self.encoder = Sequential( #Codificar
         [
           Dense(dims, activation="relu"),
           Dense(dims, activation="relu"),
@@ -19,7 +21,7 @@ class AutoEncoders(Model):
         ]
     )
 
-    self.decoder = Sequential(
+    self.decoder = Sequential( #Decodificar
         [
           Dense(dims, activation="relu"),
           Dense(dims, activation="relu"),
@@ -27,12 +29,21 @@ class AutoEncoders(Model):
         ]
     )
 
-  def call(self, inputs):
+  def call(self, inputs): #Llama al autoencoder
 
     encoded = self.encoder(inputs)
     decoded = self.decoder(encoded)
     return decoded
+    
+'''
+Función: get_MPL_encoding
 
+Descripción: Crea el autoencoder y codifica los datos
+
+Parametros: data (array de numpy), dims (int)
+
+Retorna: reduced_df (dataframe de pandas)
+'''
 def get_MLP_encoding(data, dims):
     
   data = pd.DataFrame(data)
@@ -49,6 +60,15 @@ def get_MLP_encoding(data, dims):
 
   return reduced_df
 
+'''
+Función: umap2d3d
+
+Descripción: Aplica el algoritmo UMAP a los datos para dejarlos en 2d
+
+Parametros: data (array de numpy), dims (int)
+
+Retorna: embedding (dataframe de pandas)
+'''
 def umap2d3d(data, dims):
   reducer = mp.UMAP(n_components=dims)
   embedding = reducer.fit_transform(data)
