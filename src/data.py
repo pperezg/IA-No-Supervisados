@@ -169,7 +169,15 @@ def saveResultFile(cajas_df, knn_df, norms, N, n, m, name, silhouette, rand):
 
     print('Results saved in '+resultPath) #Prints the path to the results file
 
+'''
+Function: saveResultFileMtn
 
+Description: Guarda en un archivo de texto los resultados del algoritmo de
+montaña.
+
+Parameters: combinatoria (list), name (string), silhouette (list), rand (list),
+best (list)
+'''
 def saveResultFileMtn(combinatoria, name, silhouette, rand, best):
     
     #Gets the current date and time, sets results path accordingly
@@ -192,7 +200,14 @@ def saveResultFileMtn(combinatoria, name, silhouette, rand, best):
     print('Results saved in '+resultPath) #Prints the path to the results file
 
 
+'''
+Function: saveResultFileSub
 
+Description: Guarda en un archivo de texto los resultados del algoritmo subtractive
+
+Parameters: combinatoria (list), name (string), silhouette (list), rand (list),
+best (list)
+'''
 def saveResultFileSub(combinatoria, name, silhouette, rand, best):
     
     #Gets the current date and time, sets results path accordingly
@@ -214,7 +229,14 @@ def saveResultFileSub(combinatoria, name, silhouette, rand, best):
 
     print('Results saved in '+resultPath) #Prints the path to the results file
 
+'''
+Function: saveResultFileKmeans
 
+Description: Guarda en un archivo de texto los resultados del algoritmo de
+K-Means
+
+Parameters: combinatoria (list), name (string), silhouette (list), rand (list)
+'''
 def saveResultFileKmeans(combinatoria, name, silhouette, rand):
     #Gets the current date and time, sets results path accordingly
     now = datetime.now()
@@ -239,6 +261,15 @@ def saveResultFileKmeans(combinatoria, name, silhouette, rand):
 
     print('Results saved in '+resultPath) #Prints the path to the results file
 
+'''
+Function: saveResultFileCMeans
+
+Description: Guarda en un archivo de texto los resultados de los algoritmos
+Fuzzy C-Means y Probabilistic C-Means
+
+Parameters: combinatoria (list), name (string), silhouetteFCM (list),
+randFCM (list), silhouettePCM (list), randPCM (list)
+'''
 def saveResultFileCMeans(combinatoria, name, silhouetteFCM, randFCM, silhouettePCM, randPCM):
     #Gets the current date and time, sets results path accordingly
     now = datetime.now()

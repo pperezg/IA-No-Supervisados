@@ -23,6 +23,13 @@ def olga2Labels(results):
 
     return resultLabels
 
+'''
+Function: plot2dClusters
+
+Description: Grafica los clusters para el dataset en dos dimensiones
+
+Parameters: data (numpy array), labels (list), algorithm (string), norm (string)
+'''
 def plot2dClusters(data, labels, algorithm, norm):
 
     sns.set()
@@ -36,6 +43,16 @@ def plot2dClusters(data, labels, algorithm, norm):
     plt.clf()
     plt.close()
 
+'''
+Function: createClusters
+
+Description: Crea los labels de los clusters según la norma dada y los centros
+dados
+
+Parameters: data (numpy array), centers (list), norm (string)
+
+Returns: labels (list)
+'''
 def createClusters(data, centers, norm):
   dist = []
   for center in centers:

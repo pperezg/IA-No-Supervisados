@@ -134,6 +134,16 @@ def boxes(norm, distance):
 
     return results
 
+'''
+Function: mountain
+
+Applies the mountain algorithm to the data.
+
+Parameters: data (numpy array), sigma, beta (floats), K (int), norm (numpy array),
+gridPoints (int)
+
+Returns: centersArray (numpy array)
+'''
 def mountain(data, sigma, beta, K, norm, gridPoints=10):
     dims = data.shape[1]
     auxGrid = np.tile(np.linspace(0,1,gridPoints),dims).reshape(-1,gridPoints)
@@ -167,6 +177,15 @@ def mountain(data, sigma, beta, K, norm, gridPoints=10):
 
     return centersArray
 
+'''
+Function: subtractive
+
+Applies the subtractive algorithm to the data.
+
+Parameters: data (numpy array), ra, factor_ra (floats), K (int), norm (numpy array)
+
+Returns: centersArray (numpy array)
+'''
 def subtractive(data, ra, factor_ra, K, norm):
     rb = ra*factor_ra
     dist = applyNorm(norm, data)**2
@@ -201,7 +220,15 @@ def subtractive(data, ra, factor_ra, K, norm):
 
     return centersArray
 
+'''
+Function: kmeans
 
+Applies the kmeans algorithm to the data.
+
+Parameters: data (numpy array), K (int), norm (string), max_iter (int)
+
+Returns: labels (list)
+'''
 def kmeans(data, K, norm, max_iter=1000):
     centers = initialCenters(data, K)
     pastCenters = None
@@ -216,7 +243,15 @@ def kmeans(data, K, norm, max_iter=1000):
         iter += 1
     return labels
         
+'''
+Function: initialCenters
 
+Randomly creates the initial centers for the kmeans algorithm.
+
+Parameters: data (numpy array), K (int)
+
+Returns: centers (numpy array)
+'''
 def initialCenters(data, K):
     n_data, dims = data.shape
     centers = np.zeros((K,dims))
@@ -225,6 +260,15 @@ def initialCenters(data, K):
         centers[i,:] = data[randomCenters[i],:]
     return centers
 
+'''
+Function: updateCenters
+
+Updates centers for the kmeans algorithm.
+
+Parameters: data (numpy array), labels (list), K (int)
+
+Returns: centers (numpy array)
+'''
 def updateCenters(data, labels, K):
     _, dims = data.shape
     centers = np.zeros((K,dims))
@@ -233,12 +277,6 @@ def updateCenters(data, labels, K):
         dataInCenter = data[labelsMatch,:]
         centers[i,:] = np.mean(dataInCenter, axis=0)
     return centers
-
-
-
-
-
-
 
 
 '''
